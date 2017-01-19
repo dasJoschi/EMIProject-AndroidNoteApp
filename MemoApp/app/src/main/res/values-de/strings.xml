@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_delete">Löschen</string>
+    <string name="delete_confirmation_message_image">Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?</string>
+    <string name="delete_confirmation_message_note">Sind Sie sicher, dass Sie diesen Notiz löschen möchten?</string>
+    <string name="delete_confirmation_message_voice">Sprachaufnahme löschen?</string>
+</resources>

@@ -13,8 +13,31 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.TransperantActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- customize the color palette -->
+        <item name="colorPrimary">#46000000</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- customize the color palette -->
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.AppTheme.Large" parent="TextAppearance.AppCompat.Large">
+    </style>
+
+    <style name="TextAppearance.AppTheme.Medium" parent="TextAppearance.AppCompat.Medium">
+    </style>
+
+    <style name="TextAppearance.AppTheme.Body1" parent="TextAppearance.AppCompat.Body1">
+    </style>
 </resources>

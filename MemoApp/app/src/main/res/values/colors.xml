@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/material_indigo_500</color>
+    <color name="colorPrimaryDark">@color/material_indigo_700</color>
+    <color name="colorAccent">@color/brown</color>
+    <item name="colorAccentDark" type="color">@color/brown_dark</item>
+
+    <color name="solid_black">#000000</color>
+    <item name="list_background" type="color">@color/white</item>
+    <item name="list_background_pressed" type="color">#ffc3c3c3</item>
+    <item name="list_item_title" type="color">@color/abc_primary_text_material_light</item>
+    <item name="counter_text_color" type="color">@color/abc_primary_text_material_dark</item>
+
+    <item name="text_clickable_normal" type="color">@color/colorPrimary</item>
+    <item name="text_clickable_pressed" type="color">@color/colorAccent</item>
+
+    <item name="blue" type="color">#20B8D1</item>
+    <item name="blue_dark" type="color">#ff1b869b</item>
+    <item name="brown" type="color">#9A2F22</item>
+    <item name="brown_dark" type="color">#ff74261c</item>
+
+    <item name="material_indigo_500" type="color">#3F51B5</item>
+    <item name="material_indigo_A200" type="color">#536dfe</item>
+    <item name="material_indigo_700" type="color">#303F9F</item>
+    <item name="material_indigo_transparent" type="color">#642f49b6</item>
+
+    <item name="material_red_A700" type="color">#d50000</item>
+    <item name="material_red_500" type="color">#F44336</item>
+    <item name="material_red_700" type="color">#D32F2F</item>
+
+    <item name="material_pink" type="color">#E91E63</item>
+    <item name="material_pink_overlay" type="color">#7dae0d47</item>
+
+    <item name="material_blue_gray_900" type="color">#263238</item>
+    <item name="material_blue_gray_dark" type="color">#1b2429</item>
+
+    <item name="white" type="color">#ffffff</item>
+
 </resources>

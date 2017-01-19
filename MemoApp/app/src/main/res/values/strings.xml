@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">EMI Project - Android Note App</string>
     <string name="action_settings">Settings</string>
+
+    <string name="action_delete">Delete</string>
+    <string name="delete_confirmation_message_image">Are you sure you want to delete this image?</string>
+    <string name="delete_confirmation_message_note">Are you sure you want to delete this note?</string>
+    <string name="delete_confirmation_message_voice">Delete voice recording?</string>
 </resources>
