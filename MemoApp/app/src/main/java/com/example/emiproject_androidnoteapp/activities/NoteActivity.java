@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +37,7 @@ import com.example.emiproject_androidnoteapp.widgets.VoiceRecordingDialog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -286,7 +288,56 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
     }
 
     private void share() {
-        //TODO
+        // update note title & text
+        note.setTitle(title_et.getText().toString());
+        note.setText(text_et.getText().toString());
+
+        // check if the note has content
+        if (note.isEmpty()){
+            // TODO show information dialog "nothing to share"
+            return;
+        }
+
+        Intent sendIntent = new Intent();
+        // multiple because more than one file could be uploaded
+        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        // set permission to read the files
+        sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        // add title, text and subject (same as title for e.g. email targets)
+        sendIntent.putExtra(Intent.EXTRA_TITLE, note.getTitle());
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, note.getTitle());
+        // also the text must be "multiple" compatible but this list has only one entry
+        ArrayList<String> text = new ArrayList<>();
+        text.add(note.getText());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+
+        // add audio record
+        if (note.getAudioClip() != null && note.getAudioClip().getDuration() > 0) {
+            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + note.getAudioClip().getFilePath()));
+        }
+
+        // add images
+        ArrayList<Uri> images = new ArrayList<>();
+        for (Image img : note.getImages()) {
+            images.add(Uri.parse("file://" + img.getFilePath()));
+        }
+        if (!images.isEmpty()) {
+            sendIntent.putExtra(Intent.EXTRA_STREAM, images);
+        }
+
+        // choose best mime type for the intent
+        if (note.getAudioClip() == null && note.getImages().isEmpty()) {
+            sendIntent.setType("text/plain");
+        } else if (note.getAudioClip() == null) {
+            sendIntent.setType(note.getImages().first().getMimeType());
+        } else if (note.getImages().isEmpty()) {
+            sendIntent.setType(note.getAudioClip().getMimeType());
+        } else {
+            sendIntent.setType("*/*");
+        }
+
+        startActivity(Intent.createChooser(sendIntent,"Sende Notiz an:"));
     }
 
     private void deleteAudioClip() {
