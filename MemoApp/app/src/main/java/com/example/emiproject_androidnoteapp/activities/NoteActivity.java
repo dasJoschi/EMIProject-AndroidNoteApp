@@ -312,18 +312,16 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         text.add(note.getText());
         sendIntent.putExtra(Intent.EXTRA_TEXT, text);
 
-        // add audio record
+        // add audio record and images
+        ArrayList<Uri> files = new ArrayList<>();
         if (note.getAudioClip() != null && note.getAudioClip().getDuration() > 0) {
-            sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + note.getAudioClip().getFilePath()));
+            files.add(Uri.parse("file://" + note.getAudioClip().getFilePath()));
         }
-
-        // add images
-        ArrayList<Uri> images = new ArrayList<>();
         for (Image img : note.getImages()) {
-            images.add(Uri.parse("file://" + img.getFilePath()));
+            files.add(Uri.parse("file://" + img.getFilePath()));
         }
-        if (!images.isEmpty()) {
-            sendIntent.putExtra(Intent.EXTRA_STREAM, images);
+        if (!files.isEmpty()) {
+            sendIntent.putExtra(Intent.EXTRA_STREAM, files);
         }
 
         // choose best mime type for the intent
@@ -336,6 +334,9 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         } else {
             sendIntent.setType("*/*");
         }
+
+        System.out.println(sendIntent.getExtras());
+        System.out.println(sendIntent.getType());
 
         startActivity(Intent.createChooser(sendIntent,"Sende Notiz an:"));
     }
