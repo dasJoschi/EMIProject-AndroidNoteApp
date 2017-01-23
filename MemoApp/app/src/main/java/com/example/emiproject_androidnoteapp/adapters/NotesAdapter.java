@@ -65,6 +65,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         if (TextUtils.isEmpty(note.getTitle())){
             holder.noteTitle_tv.setVisibility(View.GONE);
         } else {
+            holder.noteTitle_tv.setVisibility(View.VISIBLE);
             holder.noteTitle_tv.setText(note.getTitle());
         }
 
@@ -82,13 +83,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                 holder.noteText_tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             }
             holder.noteText_tv.setVisibility(View.VISIBLE);
+            holder.noteText_tv.setText(text);
             holder.textIcon.setVisibility(View.VISIBLE);
         } else {
             holder.noteText_tv.setVisibility(View.GONE);
             holder.textIcon.setVisibility(View.GONE);
         }
 
-        holder.noteText_tv.setText(text);
         holder.micIcon.setVisibility(note.getAudioClip() != null ? View.VISIBLE : View.GONE);
         holder.imageIcon.setVisibility(!note.getImages().isEmpty() ? View.VISIBLE : View.GONE);
     }

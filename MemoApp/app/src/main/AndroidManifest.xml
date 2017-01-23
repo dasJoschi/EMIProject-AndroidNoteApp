@@ -23,6 +23,7 @@
         </activity>
         <activity
             android:name=".activities.NoteActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="">
         </activity>
 

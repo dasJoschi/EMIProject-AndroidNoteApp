@@ -184,7 +184,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (note.isEmpty()){
+                if (note.isEmpty()) {
                     deleteNote();
                     return true;
                 }
@@ -238,12 +238,12 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
 
     private void deleteImage(long id) {
         Image imageToDelete = null;
-        for (Image image : note.getImages()){
-            if (image.getLocalId() == id){
+        for (Image image : note.getImages()) {
+            if (image.getLocalId() == id) {
                 imageToDelete = image;
             }
         }
-        if (imageToDelete != null){
+        if (imageToDelete != null) {
             File imageFile = new File(imageToDelete.getFilePath());
             if (imageFile.exists()) {
                 imageFile.delete();
@@ -293,8 +293,11 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         note.setText(text_et.getText().toString());
 
         // check if the note has content
-        if (note.isEmpty()){
-            // TODO show information dialog "nothing to share"
+        if (note.isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setMessage("There is nothing to share!")
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
             return;
         }
 
@@ -305,40 +308,29 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         // add title, text and subject (same as title for e.g. email targets)
-        sendIntent.putExtra(Intent.EXTRA_TITLE, note.getTitle());
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, note.getTitle());
-        // also the text must be "multiple" compatible but this list has only one entry
-        ArrayList<String> text = new ArrayList<>();
-        text.add(note.getText());
-        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, note.getText());
 
         // add audio record and images
         ArrayList<Uri> files = new ArrayList<>();
         if (note.getAudioClip() != null && note.getAudioClip().getDuration() > 0) {
             files.add(Uri.parse("file://" + note.getAudioClip().getFilePath()));
         }
-        for (Image img : note.getImages()) {
-            files.add(Uri.parse("file://" + img.getFilePath()));
-        }
-        if (!files.isEmpty()) {
-            sendIntent.putExtra(Intent.EXTRA_STREAM, files);
+        if (note.getImages() != null) {
+            for (Image img : note.getImages()) {
+                files.add(Uri.parse("file://" + img.getFilePath()));
+            }
         }
 
         // choose best mime type for the intent
-        if (note.getAudioClip() == null && note.getImages().isEmpty()) {
-            sendIntent.setType("text/plain");
-        } else if (note.getAudioClip() == null) {
-            sendIntent.setType(note.getImages().first().getMimeType());
-        } else if (note.getImages().isEmpty()) {
-            sendIntent.setType(note.getAudioClip().getMimeType());
-        } else {
+        if (!files.isEmpty()) {
+            sendIntent.putExtra(Intent.EXTRA_STREAM, files);
             sendIntent.setType("*/*");
+        } else {
+            sendIntent.setType("text/plain");
         }
 
-        System.out.println(sendIntent.getExtras());
-        System.out.println(sendIntent.getType());
-
-        startActivity(Intent.createChooser(sendIntent,"Sende Notiz an:"));
+        startActivity(Intent.createChooser(sendIntent, "Sende Notiz an:"));
     }
 
     private void deleteAudioClip() {
@@ -377,7 +369,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         note.setTitle(title_et.getText().toString());
         note.setText(text_et.getText().toString());
 
-        if (note.isEmpty()){
+        if (note.isEmpty()) {
             deleteNote();
             return;
         }
