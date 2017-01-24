@@ -1,12 +1,15 @@
 package com.example.emiproject_androidnoteapp.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -116,7 +119,23 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoiceRecordingDialog.show(NoteActivity.this, NoteActivity.this);
+                // check if the application has the permission to use the mic
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                    // the application already has permission
+                    VoiceRecordingDialog.show(NoteActivity.this, NoteActivity.this);
+                } else {
+                    // try to get permission
+                    ActivityCompat.requestPermissions(NoteActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
+                    // recheck if permission was granted
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                        VoiceRecordingDialog.show(NoteActivity.this, NoteActivity.this);
+                    } else {
+                        new AlertDialog.Builder(NoteActivity.this)
+                                .setMessage("Can not record audio. No permission was given.")
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show();
+                    }
+                }
             }
         });
         btn_play.setOnClickListener(new View.OnClickListener() {
