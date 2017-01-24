@@ -342,11 +342,14 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         }
 
         // choose best mime type for the intent
-        if (!files.isEmpty()) {
-            sendIntent.putExtra(Intent.EXTRA_STREAM, files);
-            sendIntent.setType("*/*");
-        } else {
+        if (note.getAudioClip() == null && note.getImages().isEmpty()) {
             sendIntent.setType("text/plain");
+        } else if (note.getAudioClip() == null) {
+            sendIntent.setType(note.getImages().first().getMimeType());
+        } else if (note.getImages().isEmpty()) {
+            sendIntent.setType(note.getAudioClip().getMimeType());
+        } else {
+            sendIntent.setType("*/*");
         }
 
         startActivity(Intent.createChooser(sendIntent, "Sende Notiz an:"));
