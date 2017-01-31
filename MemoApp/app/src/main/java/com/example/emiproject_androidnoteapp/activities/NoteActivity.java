@@ -338,11 +338,10 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         if (note.getAudioClip() != null && note.getAudioClip().getDuration() > 0) {
             files.add(Uri.parse("file://" + note.getAudioClip().getFilePath()));
         }
-        if (note.getImages() != null) {
-            for (Image img : note.getImages()) {
-                files.add(Uri.parse("file://" + img.getFilePath()));
-            }
+        for (Image img : note.getImages()) {
+            files.add(Uri.parse("file://" + img.getFilePath()));
         }
+        sendIntent.putExtra(Intent.EXTRA_STREAM, files);
 
         // choose best mime type for the intent
         if (note.getAudioClip() == null && note.getImages().isEmpty()) {
@@ -355,7 +354,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
             sendIntent.setType("*/*");
         }
 
-        startActivity(sendIntent);
+        startActivity(Intent.createChooser(sendIntent, "Share with:"));
     }
 
     private void deleteAudioClip() {
