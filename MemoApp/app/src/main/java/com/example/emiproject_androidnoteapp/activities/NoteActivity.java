@@ -40,6 +40,7 @@ import com.example.emiproject_androidnoteapp.widgets.VoiceRecordingDialog;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -59,7 +60,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
     private ProgressBar progressBar_clip;
     private EditText title_et, text_et;
     private View media_controller;
-    private TextView tv_clipLength;
+    private TextView tv_clipLength, date_tv;
     private RecyclerView imagesRecyclerView;
     private ImagesAdapter imagesAdapter;
 
@@ -78,6 +79,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         realm = new RealmFacade();
         title_et = (EditText) findViewById(R.id.title_et);
         text_et = (EditText) findViewById(R.id.text_et);
+        date_tv = (TextView) findViewById(R.id.date_tv);
         media_controller = findViewById(R.id.media_controller);
         tv_clipLength = (TextView) findViewById(R.id.tv_clipLength);
         btn_play = (ImageView) findViewById(R.id.btn_play);
@@ -180,6 +182,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
     private void populateViews() {
         title_et.setText(note.getTitle());
         text_et.setText(note.getText());
+        date_tv.setText(new SimpleDateFormat("dd.MM.yy").format(note.getCreationDate()));
     }
 
     private void initRecyclerView() {
@@ -352,7 +355,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
             sendIntent.setType("*/*");
         }
 
-        startActivity(Intent.createChooser(sendIntent, "Sende Notiz an:"));
+        startActivity(sendIntent);
     }
 
     private void deleteAudioClip() {

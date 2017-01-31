@@ -43,6 +43,14 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:text="date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date_tv"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd" />
+
                 <com.example.emiproject_androidnoteapp.widgets.CustomEditText
                     android:id="@+id/text_et"
                     android:layout_width="match_parent"
