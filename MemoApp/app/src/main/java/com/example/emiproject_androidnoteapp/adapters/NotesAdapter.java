@@ -15,6 +15,7 @@ import com.example.emiproject_androidnoteapp.R;
 import com.example.emiproject_androidnoteapp.models.Note;
 import com.example.emiproject_androidnoteapp.utils.RecyclerViewItemListener;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import io.realm.RealmResults;
@@ -69,6 +70,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
             holder.noteTitle_tv.setText(note.getTitle());
         }
 
+        holder.noteDate_tv.setVisibility(View.VISIBLE);
+        holder.noteDate_tv.setText(new SimpleDateFormat("dd.MM.yy").format(note.getCreationDate()));
+
         String text = note.getText();
         if (!TextUtils.isEmpty(text)) {
             if (text.length() <= 10) {
@@ -111,7 +115,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView noteTitle_tv, noteText_tv;
+        TextView noteTitle_tv, noteText_tv, noteDate_tv;
         ImageView micIcon, textIcon, imageIcon;
 
         public NoteViewHolder(View itemView) {
@@ -119,6 +123,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
             noteTitle_tv = (TextView) itemView.findViewById(R.id.noteTitle_tv);
             noteText_tv = (TextView) itemView.findViewById(R.id.noteText_tv);
+            noteDate_tv = (TextView) itemView.findViewById(R.id.noteDate_tv);
 
             micIcon = (ImageView) itemView.findViewById(R.id.micIcon);
             textIcon = (ImageView) itemView.findViewById(R.id.textIcon);
