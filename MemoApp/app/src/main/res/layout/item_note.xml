@@ -49,17 +49,18 @@
             android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginTop="4dp"
             android:gravity="right">
 
             <TextView
-                android:text="date"
-                android:layout_width="wrap_content"
+                tools:text="date"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/noteDate_tv"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppTheme.Medium"
+                android:textSize="15sp"
+                android:textColor="#616161"
                 android:textStyle="normal|bold"/>
 
             <ImageView
@@ -72,14 +73,14 @@
                 android:id="@+id/textIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_text_fields_gray_24dp" />
 
             <ImageView
                 android:id="@+id/imageIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_photo_gray_24dp" />
         </LinearLayout>
 

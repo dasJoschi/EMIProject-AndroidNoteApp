@@ -182,6 +182,8 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
     private void populateViews() {
         title_et.setText(note.getTitle());
         text_et.setText(note.getText());
+
+        date_tv.setVisibility(View.VISIBLE);
         date_tv.setText(new SimpleDateFormat("dd.MM.yy").format(note.getCreationDate()));
     }
 
@@ -324,8 +326,7 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         }
 
         Intent sendIntent = new Intent();
-        // multiple because more than one file could be uploaded
-        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+
         // set permission to read the files
         sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
@@ -341,7 +342,14 @@ public class NoteActivity extends AudioControllerActivity implements VoiceRecord
         for (Image img : note.getImages()) {
             files.add(Uri.parse("file://" + img.getFilePath()));
         }
-        sendIntent.putExtra(Intent.EXTRA_STREAM, files);
+
+        if (files.isEmpty()){
+            sendIntent.setAction(Intent.ACTION_SEND);
+        } else {
+            // multiple because more than one file could be uploaded
+            sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+        }
 
         // choose best mime type for the intent
         if (note.getAudioClip() == null && note.getImages().isEmpty()) {
