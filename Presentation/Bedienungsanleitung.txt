@@ -1,0 +1,21 @@
+Bedienung des Notizprogrammes
+
+Nach einer frischen Installation des Notizprogrammes ist eine saubere Oberfläche vorhanden
+auf der an der unteren rechten Ecke ein roter "floating action button" die Aufmerksamkeit des Nutzers auf sich zieht.
+Mithilfe des Buttons können alle gewünschten Arten von Notizen erstellt werden.
+Nach der Betätigung des Buttons erscheint ein neues Fenster mit jeweils einem Textfeld für Titel und die eigentliche Notiz.
+An der jeweiligen Stelle kann der Titel der Notiz bzw. der gewünschte Textinhalt eingetragen werden.
+Je nach Wunsch können an dem unteren Rand des Bildschirms eine beliebige Anzahl von Bildern mithilfe des Kamerasymbols
+und/oder eine einzelne Audioaufnahme mithilfe des Mikrofonsymbols der Notiz hinzugefügt werden.
+Nachdem alle gewünschten Inhalte hinzugefügt wurden kann die Notiz am oberen rechten Rand mithilfe des Häckchensymbols gespeichert werden.
+Um eine Nachricht speichern zu können muss sie wenigstens eine der 4 folgenden Inhalte enthalten:
+- Titel
+- Textnotiz
+- Bild
+- Audioaufnahme 
+Falls die Notiz nicht gespeichert werden soll reicht es aus die "Zurück" Taste des Smartphones oder den Pfeil am oberen linken Bildschirmrand zu betätigen.
+Auf Wunsch kann die Notiz mithilfe des Pfeilsymbols am unteren linken Bildschirmrand geteilt werden.
+Nachdem die Notiz gespeichert wurde erscheint sie auf dem Hauptbildschirm, welcher automatisch wieder aufgerufen wird.
+Die Notiz ist mit einem Titel, dem Erstellungsdatum und einer Vorschau des Textinhaltes versehen.
+Je nach Inhalt der Notiz werden Symbole für Text-, Bild- oder Audioinhalt hinzugefügt.
+Zum lesen oder bearbeiten der Notiz kann man nun bequem die jeweilige Notiz anklicken was wiederum das schon bekannte Fenster mit den jeweiligen Inhalten der Notiz öffnet.
